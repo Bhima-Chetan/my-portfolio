@@ -3,7 +3,7 @@
 */
 import React, { useContext } from 'react';
 import { ThemeContext } from '../context/ThemeContext';
-import { FaSun, FaMoon } from 'react-icons/fa'; // Run: npm install react-icons
+import { FaSun, FaMoon } from 'react-icons/fa';
 
 const ThemeSwitcher = () => {
   const { theme, toggleTheme } = useContext(ThemeContext);

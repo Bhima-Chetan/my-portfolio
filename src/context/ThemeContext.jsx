@@ -1,12 +1,8 @@
-/* File: src/context/ThemeContext.jsx
-  This file creates the context that will provide the theme state to your entire app.
-*/
+// src/context/ThemeContext.jsx
 import React, { createContext, useState, useEffect } from 'react';
 
-// Create the context
 export const ThemeContext = createContext();
 
-// Create the provider component
 export const ThemeProvider = ({ children }) => {
   // Default to dark theme to fix the visibility issue
   const [theme, setTheme] = useState('dark');
@@ -22,17 +18,15 @@ export const ThemeProvider = ({ children }) => {
     }
   }, []);
 
-  // This effect runs whenever the theme changes.
   useEffect(() => {
-    // It sets a 'data-theme' attribute on the body tag (e.g., <body data-theme="dark">)
+    // Apply theme to body
     document.body.setAttribute('data-theme', theme);
-    // It saves the user's choice to localStorage.
+    // Save theme to localStorage
     localStorage.setItem('theme', theme);
   }, [theme]);
 
-  // Function to toggle the theme between 'light' and 'dark'
   const toggleTheme = () => {
-    setTheme(prevTheme => (prevTheme === 'light' ? 'dark' : 'light'));
+    setTheme(prevTheme => prevTheme === 'light' ? 'dark' : 'light');
   };
 
   return (
