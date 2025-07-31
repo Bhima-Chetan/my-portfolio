@@ -36,7 +36,7 @@ const allProjects = [
     image: 'https://placehold.co/600x400/1B263B/E0E1DD?text=Portfolio',
     category: 'Web App',
     tech: ['React', 'Framer Motion', 'Three.js', 'CSS3'],
-    liveDemo: '',
+    liveDemo: 'https://bhima-chetan.github.io/my-portfolio/',
     sourceCode: 'https://github.com/your-username/portfolio'
   },
   {
