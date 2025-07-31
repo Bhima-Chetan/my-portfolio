@@ -4,16 +4,13 @@ import { motion, AnimatePresence } from 'framer-motion';
 import ProjectCard from '../components/ProjectCard';
 import Modal from '../components/Modal';
 
-import smartPresenceAiImage from '../assets/images/smart-presence-ai.jpg';
-import bakeryEcommerceImage from '../assets/images/bakery-ecommerce.jpg';
-
-// EXPANDED PROJECT DATA with category property
+// Using descriptive placeholders for all project images
 const allProjects = [
   { 
     id: 1, 
     title: 'SMART PRESENCE AI', 
     description: 'Engineered facial recognition attendance system with 98% accuracy using Python and TensorFlow. Developed intuitive dashboard for attendance reporting and analytics.', 
-    image: smartPresenceAiImage, 
+    image: 'https://placehold.co/600x400/20C997/0D1B2A?text=Smart+Presence+AI', 
     category: 'AI',
     tech: ['Python', 'TensorFlow', 'React.js', 'Node.js', 'MongoDB', 'AWS'],
     liveDemo: '',
@@ -23,7 +20,7 @@ const allProjects = [
     id: 2, 
     title: 'Bakery E-commerce', 
     description: 'Developed a full-featured e-commerce application for a bakery using Vue and Firebase. Implemented user authentication, product management, and real-time order tracking.', 
-    image: bakeryEcommerceImage, 
+    image: 'https://placehold.co/600x400/E0E1DD/1B263B?text=Bakery+E-commerce', 
     category: 'Web App',
     tech: ['Vue', 'Firebase'],
     liveDemo: '',
@@ -33,17 +30,17 @@ const allProjects = [
     id: 3,
     title: 'Portfolio Website',
     description: 'Modern responsive portfolio website built with React and Framer Motion. Features 3D animations, theme switching, and interactive components.',
-    image: 'https://placehold.co/600x400/1B263B/E0E1DD?text=Portfolio',
+    image: 'https://placehold.co/600x400/1B263B/E0E1DD?text=Portfolio+Website',
     category: 'Web App',
     tech: ['React', 'Framer Motion', 'Three.js', 'CSS3'],
     liveDemo: 'https://bhima-chetan.github.io/my-portfolio/',
-    sourceCode: 'https://github.com/your-username/portfolio'
+    sourceCode: 'https://github.com/Bhima-Chetan/my-portfolio'
   },
   {
     id: 4,
     title: 'TO-DO List App',
     description: 'Cross-platform mobile application for task management with real-time synchronization and offline support.',
-    image: 'https://placehold.co/600x400/20C997/0D1B2A?text=Task+Manager',
+    image: 'https://placehold.co/600x400/20C997/0D1B2A?text=To-Do+List',
     category: 'Mobile App',
     tech: ['React Native', 'Firebase', 'Redux', 'AsyncStorage'],
     liveDemo: 'https://todo-list-app-bct.netlify.app/',
