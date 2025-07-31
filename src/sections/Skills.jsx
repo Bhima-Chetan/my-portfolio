@@ -1,20 +1,25 @@
 // src/sections/Skills.jsx
 import React from 'react';
 import { motion } from 'framer-motion';
-import { FaReact, FaNodeJs, FaHtml5, FaCss3Alt, FaJsSquare, FaGitAlt } from 'react-icons/fa';
-import { SiMongodb, SiExpress, SiVite, SiTailwindcss } from 'react-icons/si';
+import { FaReact, FaNodeJs, FaHtml5, FaCss3Alt, FaJsSquare, FaGitAlt, FaDocker, FaAws } from 'react-icons/fa';
+import { SiMongodb, SiExpress, SiVite, SiTailwindcss, SiTypescript, SiPostgresql, SiNextdotjs } from 'react-icons/si';
 
 const skills = [
   { name: 'React', icon: <FaReact size={50} />, level: 90 },
   { name: 'Node.js', icon: <FaNodeJs size={50} />, level: 85 },
+  { name: 'TypeScript', icon: <SiTypescript size={50} />, level: 85 },
+  { name: 'JavaScript', icon: <FaJsSquare size={50} />, level: 88 },
   { name: 'HTML5', icon: <FaHtml5 size={50} />, level: 95 },
   { name: 'CSS3', icon: <FaCss3Alt size={50} />, level: 90 },
-  { name: 'JavaScript', icon: <FaJsSquare size={50} />, level: 88 },
-  { name: 'MongoDB', icon: <SiMongodb size={50} />, level: 80 },
-  { name: 'Express.js', icon: <SiExpress size={50} />, level: 82 },
-  { name: 'Git', icon: <FaGitAlt size={50} />, level: 85 },
-  { name: 'Vite', icon: <SiVite size={50} />, level: 75 },
   { name: 'Tailwind CSS', icon: <SiTailwindcss size={50} />, level: 88 },
+  { name: 'Next.js', icon: <SiNextdotjs size={50} />, level: 80 },
+  { name: 'Express.js', icon: <SiExpress size={50} />, level: 82 },
+  { name: 'MongoDB', icon: <SiMongodb size={50} />, level: 80 },
+  { name: 'PostgreSQL', icon: <SiPostgresql size={50} />, level: 78 },
+  { name: 'Git', icon: <FaGitAlt size={50} />, level: 85 },
+  { name: 'Docker', icon: <FaDocker size={50} />, level: 70 },
+  { name: 'Vite', icon: <SiVite size={50} />, level: 75 },
+  { name: 'AWS', icon: <FaAws size={50} />, level: 65 },
 ];
 
 const Skills = () => {

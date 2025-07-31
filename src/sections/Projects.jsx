@@ -41,13 +41,13 @@ const allProjects = [
   },
   {
     id: 4,
-    title: 'Task Manager Mobile App',
+    title: 'TO-DO List App',
     description: 'Cross-platform mobile application for task management with real-time synchronization and offline support.',
     image: 'https://placehold.co/600x400/20C997/0D1B2A?text=Task+Manager',
     category: 'Mobile App',
     tech: ['React Native', 'Firebase', 'Redux', 'AsyncStorage'],
-    liveDemo: '',
-    sourceCode: 'https://github.com/your-username/task-manager'
+    liveDemo: 'https://todo-list-app-bct.netlify.app/',
+    sourceCode: 'https://github.com/Bhima-Chetan/todo-list-app'
   },
   {
     id: 5,
