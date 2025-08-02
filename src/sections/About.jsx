@@ -42,11 +42,13 @@ const About = () => {
           <p>
             My experience includes working with React, Node.js, JavaScript, TypeScript, and various 
             other technologies. I'm always eager to learn new things and take on challenging projects.
+            You can check out my projects below or connect with me on GitHub and LinkedIn.
+            live projects that showcase my skills and creativity, TO-do list application and my portfolio website.
           </p>
         </motion.div>
 
         <motion.a 
-          href="/resume-bhima-chetan.pdf" 
+          href="/my-portfolio/resume-bhima-chetan.pdf" 
           target="_blank" 
           rel="noopener noreferrer" 
           className="resume-button"

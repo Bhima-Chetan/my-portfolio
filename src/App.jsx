@@ -1,7 +1,7 @@
 // src/App.jsx
 import React from 'react';
 import Navbar from './components/Navbar';
-import Home from './sections/Home';
+import Home from './sections/home.jsx'; 
 import About from './sections/About.jsx';
 import Projects from './sections/Projects';
 import Skills from './sections/Skills';

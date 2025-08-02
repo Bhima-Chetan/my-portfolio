@@ -7,27 +7,20 @@ const ProjectCard = ({ project, onClick }) => {
     <motion.div 
       className="project-card" 
       onClick={onClick}
-      whileHover={{ 
-        scale: 1.05,
-        y: -10,
-        transition: { duration: 0.3 }
-      }}
-      whileTap={{ scale: 0.95 }}
+      layout
     >
+      <div className="project-category">{project.category}</div>
       <img 
         src={project.image} 
         alt={project.title} 
-        className="project-image"
+        className="project-image" 
         loading="lazy"
+        width="600" // Added width
+        height="400" // Added height
       />
       <div className="project-info">
         <h3>{project.title}</h3>
-        <p className="project-description">{project.description}</p>
-        <div className="project-tech">
-          {project.tech.map((tech, index) => (
-            <span key={index} className="tech-tag">{tech}</span>
-          ))}
-        </div>
+        <p>{project.description.substring(0, 100)}...</p>
       </div>
     </motion.div>
   );
