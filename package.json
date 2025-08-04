@@ -14,6 +14,7 @@
     "@portabletext/react": "^3.2.1",
     "@sanity/client": "^7.8.1",
     "@tailwindcss/vite": "^4.1.11",
+    "clsx": "^2.1.1",
     "framer-motion": "^12.23.11",
     "globe.gl": "^2.42.0",
     "gsap": "^3.13.0",
@@ -37,6 +38,7 @@
     "globals": "^16.3.0",
     "sharp": "^0.34.3",
     "svgo": "^4.0.0",
+    "terser": "^5.43.1",
     "vite": "^7.0.4",
     "vite-plugin-image-optimizer": "^2.0.2"
   }
