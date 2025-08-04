@@ -3,6 +3,7 @@ import React, { useState, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import ProjectCard from '../components/ProjectCard';
 import Modal from '../components/Modal';
+import Folder from '../components/Folder';
 
 // Using descriptive placeholders for all project images
 const allProjects = [
@@ -89,6 +90,7 @@ const Projects = () => {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.8 }}
+        style={{ marginBottom: '1rem' }}
       >
         My Projects
       </motion.h2>
@@ -100,6 +102,7 @@ const Projects = () => {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.6, delay: 0.2 }}
+        style={{ marginBottom: '1rem' }}
       >
         {filterCategories.map((category, index) => (
           <motion.button
@@ -118,35 +121,29 @@ const Projects = () => {
         ))}
       </motion.div>
 
-      {/* Animated Project Gallery */}
-      <motion.div layout className="project-gallery">
-        <AnimatePresence>
-          {filteredProjects.map((project, index) => (
-            <motion.div
-              layout
+      <motion.div 
+        className="projects-container"
+        initial={{ opacity: 0, y: 50 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.8, delay: 0.4 }}
+      >
+        <Folder 
+          items={filteredProjects.map(project => (
+            <ProjectCard 
               key={project.id}
-              initial={{ opacity: 0, scale: 0.8, y: 50 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.8, y: -50 }}
-              transition={{ 
-                duration: 0.5, 
-                delay: index * 0.1,
-                layout: { duration: 0.3 }
-              }}
-              whileHover={{ y: -10 }}
-            >
-              <ProjectCard
-                project={project}
-                onClick={() => setSelectedProject(project)}
-              />
-            </motion.div>
+              project={project}
+              onClick={() => setSelectedProject(project)}
+            />
           ))}
-        </AnimatePresence>
+        />
       </motion.div>
 
-      {selectedProject && (
-        <Modal project={selectedProject} onClose={() => setSelectedProject(null)} />
-      )}
+      <AnimatePresence>
+        {selectedProject && (
+          <Modal project={selectedProject} onClose={() => setSelectedProject(null)} />
+        )}
+      </AnimatePresence>
     </section>
   );
 };

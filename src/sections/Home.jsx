@@ -1,7 +1,8 @@
 // src/sections/Home.jsx
 import React from 'react';
 import { motion } from 'framer-motion';
-import profilePicture from '../assets/profile-picture.webp'; // Changed to .webp
+import ProfileCard from '../components/ProfileCard';
+import profileImage from '../assets/profile-picture.webp';
 
 const Home = () => {
   return (
@@ -28,12 +29,22 @@ const Home = () => {
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.8, delay: 0.4, type: 'spring', stiffness: 120 }}
         >
-          <img 
-            src={profilePicture} 
-            alt="Bhima Chetan" 
-            className="profile-image" 
-            width="300" // Added width
-            height="300" // Added height
+          <ProfileCard
+            name="Bhima Chetan"
+            title="Full Stack Developer"
+            handle="bhima-chetan"
+            status="Available for work"
+            contactText="Contact Me"
+            showUserInfo={true}
+            enableTilt={true}
+            enableMobileTilt={true}
+            avatarUrl={profileImage}
+            onContactClick={() => {
+              const contactSection = document.getElementById('contact');
+              if (contactSection) {
+                contactSection.scrollIntoView({ behavior: 'smooth' });
+              }
+            }}
           />
         </motion.div>
       </div>

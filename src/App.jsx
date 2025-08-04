@@ -1,37 +1,38 @@
 // src/App.jsx
-import React from 'react';
+import React, { Suspense, lazy } from 'react';
 import Navbar from './components/Navbar';
-import Home from './sections/Home.jsx'; 
-import About from './sections/About.jsx';
-import Projects from './sections/Projects';
-import Skills from './sections/Skills';
-import Contact from './sections/Contact';
-import Footer from './components/Footer';
-import ScrollToTopButton from './components/ScrollToTopButton';
-import CustomCursor from './components/CustomCursor';
-import Preloader from './components/Preloader';
-import Scene3D from './components/Scene3D';
+import VantaNetBackground from './components/VantaNetBackground';
 import './App.css';
+
+// Lazy load components to reduce initial bundle size
+const Home = lazy(() => import('./sections/Home.jsx'));
+const About = lazy(() => import('./sections/About.jsx'));
+const Projects = lazy(() => import('./sections/Projects'));
+const Skills = lazy(() => import('./sections/Skills'));
+const Contact = lazy(() => import('./sections/Contact'));
+const Footer = lazy(() => import('./components/Footer'));
+const ScrollToTopButton = lazy(() => import('./components/ScrollToTopButton'));
 
 function App() {
   return (
     <div className="App">
-      <Preloader />
-      <CustomCursor />
-      
-      {/* Replace the CSS particles with 3D scene */}
-      <Scene3D />
+      {/* Vanta.js NET Background */}
+      <VantaNetBackground />
       
       <Navbar />
       <main>
-        <Home />
-        <About />
-        <Projects />
-        <Skills />
-        <Contact />
+        <Suspense fallback={<div className="loading-section">Loading...</div>}>
+          <Home />
+          <About />
+          <Projects />
+          <Skills />
+          <Contact />
+        </Suspense>
       </main>
-      <Footer />
-      <ScrollToTopButton />
+      <Suspense fallback={null}>
+        <Footer />
+        <ScrollToTopButton />
+      </Suspense>
     </div>
   );
 }

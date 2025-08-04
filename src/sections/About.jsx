@@ -2,6 +2,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { FaGithub, FaLinkedin } from 'react-icons/fa';
+import ScrollReveal from '../components/ScrollReveal';
 
 const About = () => {
   // IMPORTANT: Replace '#' with your actual profile URLs
@@ -35,16 +36,38 @@ const About = () => {
           transition={{ duration: 0.8, delay: 0.4 }}
           className="about-text"
         >
-          <p>
-            I'm a passionate Full Stack Developer with expertise in modern web technologies. 
-            I love creating beautiful, functional, and user-friendly applications that solve real-world problems.
-          </p>
-          <p>
-            My experience includes working with React, Node.js, JavaScript, TypeScript, and various 
-            other technologies. I'm always eager to learn new things and take on challenging projects.
-            You can check out my projects below or connect with me on GitHub and LinkedIn.
-            live projects that showcase my skills and creativity, TO-do list application and my portfolio website.
-          </p>
+          <ScrollReveal
+            baseOpacity={0}
+            enableBlur={true}
+            baseRotation={3}
+            blurStrength={12}
+            containerClassName="about-scroll-reveal"
+            textClassName="about-reveal-text"
+          >
+            I'm a passionate Full Stack Developer with expertise in modern web technologies. I love creating beautiful, functional, and user-friendly applications that solve real-world problems.
+          </ScrollReveal>
+          
+          <ScrollReveal
+            baseOpacity={0}
+            enableBlur={true}
+            baseRotation={2}
+            blurStrength={10}
+            containerClassName="about-scroll-reveal"
+            textClassName="about-reveal-text"
+          >
+            My experience includes working with React, Node.js, JavaScript, TypeScript, and various other technologies. I'm always eager to learn new things and take on challenging projects. You can check out my projects below or connect with me on GitHub and LinkedIn.
+          </ScrollReveal>
+          
+          <ScrollReveal
+            baseOpacity={0}
+            enableBlur={true}
+            baseRotation={4}
+            blurStrength={15}
+            containerClassName="about-scroll-reveal quote-reveal"
+            textClassName="about-reveal-text quote-text"
+          >
+            When does a developer truly succeed? When they write perfect code? No! When they use the latest framework? No! When they deploy without bugs? No! A developer succeeds when their work makes a lasting impact!
+          </ScrollReveal>
         </motion.div>
 
         <motion.a 

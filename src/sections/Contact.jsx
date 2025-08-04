@@ -2,6 +2,7 @@
 import React, { useState, useRef } from 'react';
 import { motion } from 'framer-motion';
 import emailjs from '@emailjs/browser';
+import { Button } from '../components/ui/stateful-button';
 
 const Contact = () => {
   const form = useRef();
@@ -101,38 +102,41 @@ const Contact = () => {
           </div>
 
           <div className="form-group">
-            <motion.input 
-              type="text" 
-              name="subject"
-              placeholder="Subject" 
-              whileFocus={{ scale: 1.02 }}
-              transition={{ duration: 0.2 }}
-            />
-          </div>
-
-          <div className="form-group">
             <motion.textarea 
               name="message"
               placeholder="Your Message" 
               required
-              rows="6"
+              rows="5"
               whileFocus={{ scale: 1.02 }}
               transition={{ duration: 0.2 }}
             ></motion.textarea>
           </div>
-          
-          {statusMessage && <p className={`form-message ${messageType}`}>{statusMessage}</p>}
 
-          <motion.button 
-            type="submit"
-            className="submit-button"
-            disabled={isSending}
-            whileHover={{ scale: isSending ? 1 : 1.05 }}
-            whileTap={{ scale: isSending ? 1 : 0.95 }}
-            transition={{ duration: 0.2 }}
+          <motion.div
+            className="submit-button-container"
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, delay: 0.8 }}
           >
-            {isSending ? 'Sending...' : 'Send Message'}
-          </motion.button>
+            <Button 
+              type="submit" 
+              className="submit-button"
+            >
+              Send Message
+            </Button>
+          </motion.div>
+
+          {statusMessage && (
+            <motion.div 
+              className={`status-message ${messageType}`}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+            >
+              {statusMessage}
+            </motion.div>
+          )}
         </motion.form>
       </motion.div>
     </section>
