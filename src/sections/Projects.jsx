@@ -59,13 +59,13 @@ const allProjects = [
   },
   {
     id: 6,
-    title: 'Fitness Tracker App',
-    description: 'Native mobile app for fitness tracking with workout plans, progress monitoring, and social features.',
-    image: 'https://placehold.co/600x400/007BFF/F8F9FA?text=Fitness+App',
-    category: 'Mobile App',
-    tech: ['Flutter', 'Dart', 'SQLite', 'Health Kit'],
-    liveDemo: '',
-    sourceCode: 'https://github.com/your-username/fitness-tracker'
+    title: 'Expense Tracker',
+    description: 'Full-stack expense tracking application with real-time data visualization, budget management, and comprehensive financial analytics dashboard.',
+    image: 'https://placehold.co/600x400/007BFF/F8F9FA?text=Expense+Tracker',
+    category: 'Web App',
+    tech: ['React', 'Node.js', 'MongoDB', 'Chart.js', 'Express'],
+    liveDemo: 'https://expense-tracker-five-xi-43.vercel.app/dashboard-overview',
+    sourceCode: 'https://github.com/Bhima-Chetan/expense-tracker'
   }
 ];
 
