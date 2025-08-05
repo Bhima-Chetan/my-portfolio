@@ -64,8 +64,8 @@ const allProjects = [
     image: 'https://placehold.co/600x400/007BFF/F8F9FA?text=Expense+Tracker',
     category: 'Web App',
     tech: ['React', 'Node.js', 'MongoDB', 'Chart.js', 'Express'],
-    liveDemo: 'https://expense-tracker-five-xi-43.vercel.app/dashboard-overview',
-    sourceCode: 'https://github.com/Bhima-Chetan/expense-tracker'
+    liveDemo: 'https://expense-tracker-five-xi-43.vercel.app/',
+    sourceCode: 'https://github.com/Bhima-Chetan/Expense-Tracker'
   }
 ];
 
