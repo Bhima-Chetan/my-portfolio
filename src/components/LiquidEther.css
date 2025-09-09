@@ -1,0 +1,5 @@
+.liquid-ether-bg{position:fixed;inset:0;width:100vw;height:100vh;z-index:0;pointer-events:none;overflow:hidden;background:#000;backdrop-filter:none;} 
+/* container absolutely fills parent, ignore pointer events for safety */
+.liquid-ether-container{position:absolute;inset:0;width:100%;height:100%;touch-action:none;pointer-events:none;}
+@media (max-width:768px){.liquid-ether-bg{opacity:0.9}.liquid-ether-container{filter:saturate(.9)}}
+@media (prefers-reduced-motion:reduce){.liquid-ether-bg{display:none}}

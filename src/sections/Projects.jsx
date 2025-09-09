@@ -49,13 +49,13 @@ const allProjects = [
   },
   {
     id: 5,
-    title: 'Weather Prediction AI',
-    description: 'Machine learning model for weather prediction using historical data and real-time APIs with 85% accuracy.',
-    image: 'https://placehold.co/600x400/415A77/E0E1DD?text=Weather+AI',
-    category: 'AI',
-    tech: ['Python', 'Scikit-learn', 'Pandas', 'API Integration'],
-    liveDemo: '',
-    sourceCode: 'https://github.com/your-username/weather-ai'
+    title: 'Chat app',
+    description: 'Real-time chat application built with React and Firebase. Features user authentication, group chats, and media sharing.',
+    image: 'https://placehold.co/600x400/415A77/E0E1DD?text=Chat+App',
+    category: 'Web App',
+    tech: ['React', 'Firebase', 'CSS3'],
+    liveDemo: 'https://chat-app-1-kg3e.onrender.com/',
+    sourceCode: 'https://github.com/Bhima-Chetan/chat-app'
   },
   {
     id: 6,
