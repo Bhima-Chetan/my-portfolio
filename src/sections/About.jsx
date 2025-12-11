@@ -72,7 +72,6 @@ const About = () => {
 
         <motion.a 
           href="/my-portfolio/new-updated-resume2.pdf" 
-          download="Bhima_Chetan_Resume.pdf"
           target="_blank" 
           rel="noopener noreferrer" 
           className="resume-button"
@@ -83,7 +82,7 @@ const About = () => {
           whileHover={{ scale: 1.05, transition: { type: 'spring', stiffness: 300 } }}
           whileTap={{ scale: 0.95 }}
         >
-          Download My Resume
+          View My Resume
         </motion.a>
 
         <motion.div 
