@@ -2,12 +2,12 @@ import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import { ViteImageOptimizer } from 'vite-plugin-image-optimizer';
 
-// https://vitejs.dev/config/
+
 export default defineConfig({
   plugins: [
     react(),
     ViteImageOptimizer({
-      /* pass your config */
+      
       png: {
         quality: 80,
       },
@@ -45,8 +45,6 @@ export default defineConfig({
     },
     chunkSizeWarningLimit: 1000,
   },
-  // This 'base' property is essential for deploying to a subfolder on GitHub Pages.
-  // It tells Vite where the assets (CSS, JS, images) will be located on the server.
-  // The value should be your repository name, surrounded by slashes.
+  
   base: '/',
 });

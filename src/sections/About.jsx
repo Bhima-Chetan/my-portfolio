@@ -71,7 +71,8 @@ const About = () => {
         </motion.div>
 
         <motion.a 
-          href="/my-portfolio/resume-bhima-chetan.pdf" 
+          href="/my-portfolio/new-updated-resume2.pdf" 
+          download="Bhima_Chetan_Resume.pdf"
           target="_blank" 
           rel="noopener noreferrer" 
           className="resume-button"

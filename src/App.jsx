@@ -1,9 +1,8 @@
 // src/App.jsx
-import React, { Suspense, lazy } from 'react';
+import React, { Suspense, lazy, useEffect, useState } from 'react';
 // import Navbar from './components/Navbar';
 import CardNav from './components/CardNav';
 import logo from './assets/react.svg';
-import LiquidEther from './components/LiquidEther';
 import './App.css';
 
 // Lazy load components to reduce initial bundle size
@@ -14,6 +13,7 @@ const Skills = lazy(() => import('./sections/Skills'));
 const Contact = lazy(() => import('./sections/Contact'));
 const Footer = lazy(() => import('./components/Footer'));
 const ScrollToTopButton = lazy(() => import('./components/ScrollToTopButton'));
+const LazyLiquidEther = lazy(() => import('./components/LiquidEther'));
 
 const navItems = [
 	{
@@ -46,10 +46,43 @@ const navItems = [
 ];
 
 function App() {
+	const [showEther, setShowEther] = useState(false);
+
+	useEffect(() => {
+		if (typeof window === 'undefined') return;
+		const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+		const isMobile = window.matchMedia('(max-width: 900px)').matches;
+		const lowCore = (navigator?.hardwareConcurrency || 4) <= 4;
+		if (prefersReduced || isMobile || lowCore) return; // skip heavy background on low-power contexts
+		const start = () => setShowEther(true);
+		if ('requestIdleCallback' in window) {
+			const id = window.requestIdleCallback(start, { timeout: 1200 });
+			return () => window.cancelIdleCallback(id);
+		}
+		const id = setTimeout(start, 500);
+		return () => clearTimeout(id);
+	}, []);
+
 	return (
 		<div className="App">
-			{/* Replaced Vanta background with optimized LiquidEther shader background */}
-			<LiquidEther fullScreen />
+			{/* Lightweight fallback background; heavier shader only mounts on capable devices */}
+			<div className="background-layer" aria-hidden="true">
+				{showEther ? (
+					<Suspense fallback={<div className="bg-fallback" />}>
+						<LazyLiquidEther
+							fullScreen
+							resolution={0.3}
+							iterationsPoisson={16}
+							iterationsViscous={8}
+							autoDemo={false}
+							BFECC={false}
+							zIndex={0}
+						/>
+					</Suspense>
+				) : (
+					<div className="bg-fallback" />
+				)}
+			</div>
 
 			<CardNav
 				logo={logo}
