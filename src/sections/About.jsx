@@ -71,7 +71,7 @@ const About = () => {
         </motion.div>
 
         <motion.a 
-          href="/my-portfolio/new-updated-resume2.pdf" 
+          href="/new-updated-resume2.pdf" 
           target="_blank" 
           rel="noopener noreferrer" 
           className="resume-button"
