@@ -2,10 +2,33 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="The personal portfolio of Bhima Chetan, a Full Stack Developer showcasing projects and skills in modern web technologies." />
-    <title>Bhima Chetan | Full Stack Developer</title>
+    <title>Bhima Chetan · Software Developer</title>
+    <meta name="description" content="Bhima Chetan, a software developer in Hyderabad building full-stack web apps with Angular, .NET, Next.js and PostgreSQL." />
+    <meta name="theme-color" content="#0b0b0c" />
+    <link rel="canonical" href="https://portfoliochetan.dev/" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://portfoliochetan.dev/" />
+    <meta property="og:title" content="Bhima Chetan · Software Developer" />
+    <meta property="og:description" content="Full-stack developer: Angular, .NET Web API, Next.js, PostgreSQL. Ex-HAL intern." />
+    <meta name="twitter:card" content="summary" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300..700&family=Geist+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
+
+    <!-- Set theme before first paint so there is no flash. -->
+    <script>
+      try {
+        var t = localStorage.getItem('theme');
+        if (t !== 'light' && t !== 'dark') t = matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+        document.documentElement.dataset.theme = t;
+      } catch (e) {
+        document.documentElement.dataset.theme = 'dark';
+      }
+    </script>
   </head>
   <body>
     <div id="root"></div>

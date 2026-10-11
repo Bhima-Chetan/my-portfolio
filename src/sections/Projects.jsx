@@ -1,151 +1,190 @@
-// src/sections/Projects.jsx
-import React, { useState, useMemo } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import ProjectCard from '../components/ProjectCard';
-import Modal from '../components/Modal';
-import Folder from '../components/Folder';
+import { useState } from 'react';
+import { AnimatePresence, motion } from 'framer-motion';
+import { FiArrowUpRight, FiCheck, FiGithub, FiHeart, FiUser } from 'react-icons/fi';
+import { SectionHead, Tags } from '../components/ui';
+import { projects } from '../data';
+import { ease, spotlight } from '../lib';
 
-// Using descriptive placeholders for all project images
-const allProjects = [
-  { 
-    id: 1, 
-    title: 'SMART PRESENCE AI', 
-    description: 'Engineered facial recognition attendance system with 98% accuracy using Python and TensorFlow. Developed intuitive dashboard for attendance reporting and analytics.', 
-    image: 'https://placehold.co/600x400/20C997/0D1B2A?text=Smart+Presence+AI', 
-    category: 'AI',
-    tech: ['Python', 'TensorFlow', 'React.js', 'Node.js', 'MongoDB', 'AWS'],
-    liveDemo: '',
-    sourceCode: 'https://github.com/chetan-github12/smart_presense_ai'
-  },
-  { 
-    id: 2, 
-    title: 'Bakery E-commerce', 
-    description: 'Developed a full-featured e-commerce application for a bakery using Vue and Firebase. Implemented user authentication, product management, and real-time order tracking.', 
-    image: 'https://placehold.co/600x400/E0E1DD/1B263B?text=Bakery+E-commerce', 
-    category: 'Web App',
-    tech: ['Vue', 'Firebase'],
-    liveDemo: '',
-    sourceCode: 'https://github.com/Bhima-Chetan/bakery-e-commerce'
-  },
-  {
-    id: 3,
-    title: 'Portfolio Website',
-    description: 'Modern responsive portfolio website built with React and Framer Motion. Features 3D animations, theme switching, and interactive components.',
-    image: 'https://placehold.co/600x400/1B263B/E0E1DD?text=Portfolio+Website',
-    category: 'Web App',
-    tech: ['React', 'Framer Motion', 'Three.js', 'CSS3'],
-    liveDemo: 'https://bhima-chetan.github.io/my-portfolio/',
-    sourceCode: 'https://github.com/Bhima-Chetan/my-portfolio'
-  },
-  {
-    id: 4,
-    title: 'TO-DO List App',
-    description: 'Cross-platform mobile application for task management with real-time synchronization and offline support.',
-    image: 'https://placehold.co/600x400/20C997/0D1B2A?text=To-Do+List',
-    category: 'Mobile App',
-    tech: ['React Native', 'Firebase', 'Redux', 'AsyncStorage'],
-    liveDemo: 'https://todo-list-app-bct.netlify.app/',
-    sourceCode: 'https://github.com/Bhima-Chetan/todo-list-app'
-  },
-  {
-    id: 5,
-    title: 'Chat app',
-    description: 'Real-time chat application built with React and Firebase. Features user authentication, group chats, and media sharing.',
-    image: 'https://placehold.co/600x400/415A77/E0E1DD?text=Chat+App',
-    category: 'Web App',
-    tech: ['React', 'Firebase', 'CSS3'],
-    liveDemo: 'https://chat-app-1-kg3e.onrender.com/',
-    sourceCode: 'https://github.com/Bhima-Chetan/chat-app'
-  },
-  {
-    id: 6,
-    title: 'Expense Tracker',
-    description: 'Full-stack expense tracking application with real-time data visualization, budget management, and comprehensive financial analytics dashboard.',
-    image: 'https://placehold.co/600x400/007BFF/F8F9FA?text=Expense+Tracker',
-    category: 'Web App',
-    tech: ['React', 'Node.js', 'MongoDB', 'Chart.js', 'Express'],
-    liveDemo: 'https://expense-tracker-five-xi-43.vercel.app/',
-    sourceCode: 'https://github.com/Bhima-Chetan/Expense-Tracker'
-  }
-];
+const filters = ['All', ...new Set(projects.map((p) => p.kind))];
 
-const filterCategories = ['All', 'Web App', 'Mobile App', 'AI'];
-
-const Projects = () => {
-  const [activeFilter, setActiveFilter] = useState('All');
-  const [selectedProject, setSelectedProject] = useState(null);
-
-  // useMemo ensures this logic only re-runs when the activeFilter changes
-  const filteredProjects = useMemo(() => {
-    if (activeFilter === 'All') {
-      return allProjects;
-    }
-    return allProjects.filter(p => p.category === activeFilter);
-  }, [activeFilter]);
-
-  return (
-    <section id="projects" className="projects-section">
-      <motion.h2
-        initial={{ opacity: 0, y: 50 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.8 }}
-        style={{ marginBottom: '1rem' }}
-      >
-        My Projects
-      </motion.h2>
-
-      {/* Filter Buttons */}
-      <motion.div 
-        className="filter-buttons"
-        initial={{ opacity: 0, y: 30 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.6, delay: 0.2 }}
-        style={{ marginBottom: '1rem' }}
-      >
-        {filterCategories.map((category, index) => (
-          <motion.button
-            key={category}
-            className={`filter-btn ${activeFilter === category ? 'active' : ''}`}
-            onClick={() => setActiveFilter(category)}
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.4, delay: 0.1 * index }}
-          >
-            {category}
-          </motion.button>
+// Tiny CSS illustrations of what each product does: no stock images to maintain.
+const art = {
+  festly: (
+    <div className="mock-booking">
+      <div className="mb-row">
+        <span>Sat · 6:00 PM</span>
+        <span className="mb-live">● Open</span>
+      </div>
+      <strong>Badminton · Doubles</strong>
+      <div className="mb-spots">
+        {[1, 1, 1, 1, 0, 0].map((f, i) => (
+          <i key={i} className={f ? 'on' : ''} />
         ))}
-      </motion.div>
-
-      <motion.div 
-        className="projects-container"
-        initial={{ opacity: 0, y: 50 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.8, delay: 0.4 }}
-      >
-        <Folder 
-          items={filteredProjects.map(project => (
-            <ProjectCard 
-              key={project.id}
-              project={project}
-              onClick={() => setSelectedProject(project)}
-            />
-          ))}
-        />
-      </motion.div>
-
-      <AnimatePresence>
-        {selectedProject && (
-          <Modal project={selectedProject} onClose={() => setSelectedProject(null)} />
-        )}
-      </AnimatePresence>
-    </section>
-  );
+        <span>2 spots left</span>
+      </div>
+      <span className="mb-btn">Book spot</span>
+      <span className="mb-pill">0% commission</span>
+    </div>
+  ),
+  unfiltered: (
+    <div className="mock-editor">
+      <div className="me-bar">
+        <b>B</b>
+        <i>I</i>
+        <u>U</u>
+        <span>H2</span>
+        <span>“ ”</span>
+      </div>
+      <strong>An unfiltered week</strong>
+      <span className="me-line" />
+      <span className="me-line" />
+      <span className="me-line short" />
+      <div className="me-react">
+        <span>
+          <FiHeart /> Like
+        </span>
+        <span>✦ Subscribe</span>
+      </div>
+    </div>
+  ),
+  'smart-presence': (
+    <div className="mock-scan">
+      <FiUser className="ms-face" />
+      <span className="ms-line" />
+      <span className="ms-tag">
+        <FiCheck /> Marked present
+      </span>
+    </div>
+  ),
+  chat: (
+    <div className="mock-chat">
+      <span className="bubble in">Still on for 7?</span>
+      <span className="bubble out">
+        On my way <small>✓✓</small>
+      </span>
+      <span className="bubble in typing">
+        <i />
+        <i />
+        <i />
+      </span>
+    </div>
+  ),
+  expense: (
+    <div className="mock-bars">
+      {[38, 62, 45, 80, 54, 70, 30].map((h, i) => (
+        <i key={i} style={{ '--h': `${h}%`, '--d': `${i * 50}ms` }} />
+      ))}
+    </div>
+  ),
+  todo: (
+    <ul className="mock-todo">
+      <li className="done">
+        <i>
+          <FiCheck />
+        </i>
+        Ship portfolio
+      </li>
+      <li className="done">
+        <i>
+          <FiCheck />
+        </i>
+        Review PR
+      </li>
+      <li className="tick">
+        <i>
+          <FiCheck />
+        </i>
+        Book a court
+      </li>
+    </ul>
+  ),
 };
 
-export default Projects;
+function ProjectCard({ p, ref }) {
+  return (
+    <motion.article
+      ref={ref}
+      layout
+      initial={{ opacity: 0, y: 20, scale: 0.98 }}
+      animate={{ opacity: 1, y: 0, scale: 1 }}
+      exit={{ opacity: 0, scale: 0.96 }}
+      transition={{ duration: 0.45, ease }}
+      className={`card project${p.featured ? ' featured' : ''}`}
+      onPointerMove={spotlight}
+    >
+      <div className={`project-art art-${p.id}`} aria-hidden="true">
+        {art[p.id]}
+      </div>
+      <div className="project-body">
+        <div className="project-meta">
+          <span>{p.kind}</span>
+          {p.status && <span className="badge">{p.status}</span>}
+        </div>
+        <h3>{p.title}</h3>
+        <p>{p.tagline}</p>
+        {p.points && (
+          <ul className="project-points">
+            {p.points.map((pt) => (
+              <li key={pt}>{pt}</li>
+            ))}
+          </ul>
+        )}
+        <Tags items={p.stack} />
+        <div className="project-links">
+          {p.live && (
+            <a href={p.live} target="_blank" rel="noreferrer" className="link-arrow">
+              Live site <FiArrowUpRight aria-hidden="true" />
+              <span className="sr-only">for {p.title}</span>
+            </a>
+          )}
+          {p.code && (
+            <a href={p.code} target="_blank" rel="noreferrer" className="link-arrow">
+              <FiGithub aria-hidden="true" /> Source
+              <span className="sr-only">code for {p.title}</span>
+            </a>
+          )}
+        </div>
+      </div>
+    </motion.article>
+  );
+}
+
+export default function Projects() {
+  const [filter, setFilter] = useState('All');
+  const shown = filter === 'All' ? projects : projects.filter((p) => p.kind === filter);
+
+  return (
+    <section id="projects" className="section container" aria-labelledby="projects-h">
+      <div className="projects-head">
+        <SectionHead
+          n="03"
+          kicker="Selected work"
+          id="projects-h"
+          title={
+            <>
+              Things I&apos;ve <em>built</em>.
+            </>
+          }
+        />
+        <div className="tabs" role="group" aria-label="Filter projects">
+          {filters.map((f) => (
+            <button key={f} type="button" aria-pressed={filter === f} onClick={() => setFilter(f)}>
+              {filter === f && <motion.span layoutId="tab-pill" className="tab-pill" transition={{ type: 'spring', stiffness: 420, damping: 34 }} />}
+              <span>
+                {f} <small>{f === 'All' ? projects.length : projects.filter((p) => p.kind === f).length}</small>
+              </span>
+            </button>
+          ))}
+        </div>
+      </div>
+
+      <motion.div layout className="project-grid">
+        <AnimatePresence mode="popLayout">
+          {shown.map((p) => (
+            <ProjectCard key={p.id} p={p} />
+          ))}
+        </AnimatePresence>
+      </motion.div>
+    </section>
+  );
+}

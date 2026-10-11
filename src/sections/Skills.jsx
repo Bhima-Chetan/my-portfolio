@@ -1,97 +1,94 @@
-// src/sections/Skills.jsx
-import React from 'react';
-import { motion } from 'framer-motion';
-import { FaReact, FaNodeJs, FaHtml5, FaCss3Alt, FaJsSquare, FaGitAlt, FaDocker, FaAws } from 'react-icons/fa';
-import { SiMongodb, SiExpress, SiVite, SiTailwindcss, SiTypescript, SiPostgresql, SiNextdotjs } from 'react-icons/si';
+import { useState } from 'react';
+import { AnimatePresence, motion } from 'framer-motion';
+import { FiArrowUpRight } from 'react-icons/fi';
+import { SectionHead } from '../components/ui';
+import { skillGroups, skillNotes, usedIn } from '../data';
+import { ease, spotlight } from '../lib';
 
-const skills = [
-  { name: 'React', icon: <FaReact size={50} />, level: 90 },
-  { name: 'Node.js', icon: <FaNodeJs size={50} />, level: 85 },
-  { name: 'TypeScript', icon: <SiTypescript size={50} />, level: 85 },
-  { name: 'JavaScript', icon: <FaJsSquare size={50} />, level: 88 },
-  { name: 'HTML5', icon: <FaHtml5 size={50} />, level: 95 },
-  { name: 'CSS3', icon: <FaCss3Alt size={50} />, level: 90 },
-  { name: 'Tailwind CSS', icon: <SiTailwindcss size={50} />, level: 88 },
-  { name: 'Next.js', icon: <SiNextdotjs size={50} />, level: 80 },
-  { name: 'Express.js', icon: <SiExpress size={50} />, level: 82 },
-  { name: 'MongoDB', icon: <SiMongodb size={50} />, level: 80 },
-  { name: 'PostgreSQL', icon: <SiPostgresql size={50} />, level: 78 },
-  { name: 'Git', icon: <FaGitAlt size={50} />, level: 85 },
-  { name: 'Docker', icon: <FaDocker size={50} />, level: 70 },
-  { name: 'Vite', icon: <SiVite size={50} />, level: 75 },
-  { name: 'AWS', icon: <FaAws size={50} />, level: 65 },
-];
+export default function Skills() {
+  const [skill, setSkill] = useState('Angular');
+  const uses = usedIn(skill);
 
-const Skills = () => {
   return (
-    <section id="skills" className="skills-section">
-      <motion.div 
-        className="skills-container"
-        initial={{ opacity: 0, y: 50 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.5}}
-      >
-        <motion.h2
-          initial={{ opacity: 0, y: 50 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
-          style={{ marginBottom: '1rem' }}
-        >
-          My Skills
-        </motion.h2>
-        <div className="skills-grid">
-          {skills.map((skill, index) => (
-            <motion.div 
-              key={index} 
-              className="skill-card-enhanced"
-              initial={{ opacity: 0, scale: 0.8 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.1 * index }}
-              whileHover={{ scale: 1.05, y: -5 }}
+    <section id="skills" className="section container" aria-labelledby="skills-h">
+      <SectionHead
+        n="04"
+        kicker="Skills"
+        id="skills-h"
+        title={
+          <>
+            The toolkit, and <em>where</em> I&apos;ve used it.
+          </>
+        }
+      />
+
+      <div className="skills-grid">
+        <div className="skill-groups">
+          <p className="skills-hint">Pick a skill to see the roles and projects behind it →</p>
+          {skillGroups.map((g, gi) => (
+            <motion.div
+              key={g.name}
+              className="skill-group"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: '-40px' }}
+              transition={{ duration: 0.6, delay: gi * 0.06, ease }}
             >
-              <div className="skill-icon">{skill.icon}</div>
-              <p className="skill-name">{skill.name}</p>
-              
-              {/* Circular Progress Bar */}
-              <div className="skill-progress-circle">
-                <svg className="progress-ring" width="80" height="80">
-                  <circle
-                    className="progress-ring-background"
-                    stroke="rgba(255, 255, 255, 0.1)"
-                    strokeWidth="4"
-                    fill="transparent"
-                    r="36"
-                    cx="40"
-                    cy="40"
-                  />
-                  <motion.circle
-                    className="progress-ring-progress"
-                    stroke="var(--accent-color)"
-                    strokeWidth="4"
-                    fill="transparent"
-                    r="36"
-                    cx="40"
-                    cy="40"
-                    strokeLinecap="round"
-                    initial={{ strokeDasharray: "226 226", strokeDashoffset: 226 }}
-                    whileInView={{ 
-                      strokeDashoffset: 226 - (226 * skill.level) / 100 
-                    }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 1.5, delay: 0.2 * index }}
-                  />
-                </svg>
-                <div className="skill-percentage">{skill.level}%</div>
+              <h3>{g.name}</h3>
+              <div className="chips" role="group" aria-label={g.name}>
+                {g.skills.map((s) => (
+                  <button
+                    key={s}
+                    type="button"
+                    className="chip-btn"
+                    aria-pressed={s === skill}
+                    aria-controls="skill-panel"
+                    onClick={() => setSkill(s)}
+                  >
+                    {s}
+                    {usedIn(s).length > 0 && <sup>{usedIn(s).length}</sup>}
+                  </button>
+                ))}
               </div>
             </motion.div>
           ))}
         </div>
-      </motion.div>
+
+        <aside id="skill-panel" className="card skill-panel" aria-live="polite" onPointerMove={spotlight}>
+          <AnimatePresence mode="wait" initial={false}>
+            <motion.div
+              key={skill}
+              initial={{ opacity: 0, y: 10, filter: 'blur(4px)' }}
+              animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+              exit={{ opacity: 0, y: -10, filter: 'blur(4px)' }}
+              transition={{ duration: 0.3, ease }}
+            >
+              <p className="kicker">Used in</p>
+              <h3>{skill}</h3>
+              {uses.length ? (
+                <ul className="uses">
+                  {uses.map((u) => (
+                    <li key={u.title}>
+                      <a href={u.href}>
+                        <span className="use-type">{u.type}</span>
+                        <span className="use-text">
+                          <strong>{u.title}</strong>
+                          <small>{u.sub}</small>
+                        </span>
+                        <FiArrowUpRight aria-hidden="true" />
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              ) : (
+                <p className="muted">
+                  {skillNotes[skill] ?? 'Not showcased in a project here yet. Happy to talk through how I use it.'}
+                </p>
+              )}
+            </motion.div>
+          </AnimatePresence>
+        </aside>
+      </div>
     </section>
   );
-};
-
-export default Skills;
+}
